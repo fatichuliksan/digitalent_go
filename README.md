@@ -1,1 +1,1 @@
-# digitalent_kominfo
+# digitalent_go
