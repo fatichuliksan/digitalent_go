@@ -5,12 +5,15 @@ import (
 	"dts-task/model"
 	"log"
 	"net/http"
+	"os"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
 	db, err := gorm.Open(sqlite.Open("./task.db"), &gorm.Config{})
 	if err != nil {
 		log.Println(err)
@@ -27,5 +30,5 @@ func main() {
 	http.HandleFunc("/update", taskController.Update)
 	http.HandleFunc("/delete/", taskController.Delete)
 
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":"+port, nil)
 }
